@@ -1,4 +1,4 @@
-name: Build and Test
+name: LZW
 
 on:
     push:
@@ -18,7 +18,7 @@ jobs:
             - name: Set up CMake
               uses: lukka/run-cmake@v2
               with:
-                  cmakeListsOrSettingsJson: 'tests/CMakeLists.txt'
+                  cmakeListsOrSettingsJson: 'CMakeLists.txt'
 
             - name: Build
               run: cmake --build build --config Release
@@ -34,7 +34,7 @@ jobs:
             - name: Set up CMake
               uses: lukka/run-cmake@v2
               with:
-                  cmakeListsOrSettingsJson: 'tests/CMakeLists.txt'
+                  cmakeListsOrSettingsJson: 'CMakeLists.txt'
 
             - name: Build
               run: cmake --build build --config Release
@@ -42,4 +42,4 @@ jobs:
 
             - name: Run Tests
               run: cmake --build build --target test
-              working-directory: .
+              working-directory: tests/
