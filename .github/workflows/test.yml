@@ -16,9 +16,6 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Set up CMake
-              run: cmake --version
-
             - name: build
               run: |
                   mkdir build
@@ -38,8 +35,9 @@ jobs:
 
             - name: Run tests
               run: |
+                  cd tests
                   mkdir build
                   cd build
                   cmake ..
                   make lzw_test
-                  ./tests/lzw_test
+                  ./lzw_test
