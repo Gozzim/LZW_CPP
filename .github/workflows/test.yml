@@ -1,0 +1,45 @@
+name: Build and Test
+
+on:
+    push:
+        branches:
+            - 'master'
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up CMake
+              uses: lukka/run-cmake@v2
+              with:
+                  cmakeListsOrSettingsJson: 'tests/CMakeLists.txt'
+
+            - name: Build
+              run: cmake --build build --config Release
+              working-directory: .
+
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up CMake
+              uses: lukka/run-cmake@v2
+              with:
+                  cmakeListsOrSettingsJson: 'tests/CMakeLists.txt'
+
+            - name: Build
+              run: cmake --build build --config Release
+              working-directory: .
+
+            - name: Run Tests
+              run: cmake --build build --target test
+              working-directory: .
