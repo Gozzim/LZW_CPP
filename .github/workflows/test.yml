@@ -1,4 +1,4 @@
-name: run-tests
+name: tests
 
 on:
     workflow_run:
@@ -9,8 +9,8 @@ on:
             - completed
 
 jobs:
-    test:
-        name: test
+    run:
+        name: run
         runs-on: ubuntu-latest
 
         steps:
