@@ -1,0 +1,43 @@
+name: LZW
+
+on:
+    push:
+        branches:
+            - 'master'
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: build
+              run: |
+                  mkdir build
+                  cd build
+                  cmake ..
+                  make
+
+    test:
+        name: test
+        runs-on: ubuntu-latest
+
+        needs: build
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Run tests
+              run: |
+                  cd tests
+                  mkdir build
+                  cd build
+                  cmake ..
+                  make lzw_test
+                  ./lzw_test
